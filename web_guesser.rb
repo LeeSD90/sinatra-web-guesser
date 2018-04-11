@@ -4,8 +4,13 @@ require 'sinatra/reloader'
 SECRET_NUMBER = rand(101)
 
 get '/' do
-	guess = params["guess"].to_i
-	number = "SECRET"
+	guess = params["guess"]
+  	message = check_guess(guess.to_i)
+  	erb :index, :locals => {:number => SECRET_NUMBER, :message => message}
+end
+
+def check_guess(guess)
+	text = ""
 
 	case
 	when (guess - SECRET_NUMBER) > 5
@@ -22,9 +27,7 @@ get '/' do
 		
 	when guess == SECRET_NUMBER
 		text = "Correct!"
-		number = SECRET_NUMBER.to_s
 	end
 
-	erb :index, :locals => {:number => number, :text => text}
-	#throw params. inspect
+	return text
 end

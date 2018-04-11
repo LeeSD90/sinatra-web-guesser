@@ -6,10 +6,12 @@
  	<input type='submit' value='Guess!' />
 	</form>
 	<p> 
-		<%= text %>
+		<%= message %>
 	</p> 
 	<p>
+	<% if message == "Correct!" -%>
     	The SECRET NUMBER is <%= number %>
+    <% end -%>
     </p>
   </body>
 </html>
